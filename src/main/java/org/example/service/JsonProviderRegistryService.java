@@ -1,7 +1,6 @@
 package org.example.service;
 
 import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
 import org.example.config.JsonProviderJsonReader;
 import org.example.model.ProviderDto;
 import org.example.registry.ProviderRegistry;
@@ -14,13 +13,18 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
 @Service
 public class JsonProviderRegistryService implements ProviderRegistry {
     private final JsonProviderJsonReader jsonProviderJsonReader;
-    @Value("${path.json-provider}")
-    private String pathProviders;
+    private final String pathProviders;
     private volatile Map<String, ProviderDto> providers = Map.of();
+
+    public JsonProviderRegistryService(JsonProviderJsonReader jsonProviderJsonReader,
+                                       @Value("${path.json-provider}") String pathProviders) {
+
+        this.jsonProviderJsonReader = jsonProviderJsonReader;
+        this.pathProviders = pathProviders;
+    }
 
     @PostConstruct
     public void init() {

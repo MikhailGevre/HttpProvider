@@ -25,11 +25,12 @@ public class RestTemplateProviderHttpClient implements ProviderHttpClient {
     private static final String PATH_SEGMENT_SUBSCRIBER = "subscribers";
     private static final String POSITIVE_STATUS = "ok";
     private final RestTemplate restTemplate;
-    @Value("${rest.template.api-key-header}")
-    private String apiKeyHeader;
+    private final String apiKeyHeader;
 
-    public RestTemplateProviderHttpClient(@Qualifier("providerRestTemplate") RestTemplate restTemplate) {
+    public RestTemplateProviderHttpClient(@Qualifier("providerRestTemplate") RestTemplate restTemplate,
+                                          @Value("${rest.template.api-key-header}") String apiKeyHeader) {
         this.restTemplate = restTemplate;
+        this.apiKeyHeader = apiKeyHeader;
     }
 
     @Override

@@ -16,21 +16,19 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 
 class RestTemplateProviderHttpClientTest {
 
-    private RestTemplate restTemplate;
     private MockRestServiceServer mockServer;
     private ProviderHttpClient providerHttpClient;
-
     private ProviderDto provider;
 
     @BeforeEach
     void setUp() {
-        restTemplate = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
         mockServer = MockRestServiceServer
                 .bindTo(restTemplate)
                 .build();
 
-        providerHttpClient = new RestTemplateProviderHttpClient(restTemplate);
+        providerHttpClient = new RestTemplateProviderHttpClient(restTemplate, "X-API-Key");
 
         provider = new ProviderDto("provider-1", "https://api-one.com", "key-111");
     }
