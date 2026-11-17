@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+
+path:
+  json-provider: ${PATH_JSON_PROVIDER}
+
+rest:
+  template:
+    api-key-header: ${API_KEY_HEADER}
